@@ -6,7 +6,7 @@
              x:Class="NFCSetup.Pages.HomePage"
              Title="HomePage">
     <StackLayout>
-        <tabView:SfTabView IndicatorPlacement="Top" TabBarPlacement="Bottom" IndicatorBackground="Black" FlowDirection="LeftToRight"
+        <tabView:SfTabView IndicatorPlacement="Top" TabBarPlacement="Bottom" IndicatorBackground="#FF7F3E" FlowDirection="LeftToRight"
                            VerticalOptions="FillAndExpand" Margin="0,0,0,20" ContentTransitionDuration="300" SelectionChanged="SfTabView_SelectionChanged">
             <tabView:SfTabView.Items>
                 <!--Home-->
@@ -36,7 +36,7 @@
                                        HorizontalOptions="CenterAndExpand" TextColor="Black"></Label>
                                     <Image>
                                         <Image.Source>
-                                            <FontImageSource Glyph="" FontFamily="FontIconSolid" Color="#008DDA"></FontImageSource>
+                                            <FontImageSource Glyph="" FontFamily="FontIconSolid" Color="#FF7F3E"></FontImageSource>
                                         </Image.Source>
                                         <Image.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding AddUserClickCommand}"></TapGestureRecognizer>

@@ -38,7 +38,7 @@
                             <Label x:Name="lblEnglish" FontAutoScalingEnabled="False"
                                    Text="Create Link"
                                    TextColor="Black"
-                                   FontSize="16"
+                                   FontSize="14"
                                    HorizontalTextAlignment="Center"
                                    VerticalTextAlignment="Center"
                                    HorizontalOptions="StartAndExpand" 
@@ -57,7 +57,7 @@
                             <Label x:Name="lblArabic" FontAutoScalingEnabled="False"
                                    Text="Custom Vcard"
                                    TextColor="Black"
-                                   FontSize="16"
+                                   FontSize="14"
                                    HorizontalTextAlignment="Center"
                                    VerticalTextAlignment="Center"
                                    HorizontalOptions="StartAndExpand"
@@ -79,7 +79,7 @@
                 </Border>
                 <Border Padding="10" BackgroundColor="#FFFFFF" VerticalOptions="Center">
 
-                    <Label Text="Cancle" FontAutoScalingEnabled="False"
+                    <Label Text="Cancel" FontAutoScalingEnabled="False"
                            TextColor="Gray"
                            FontSize="14"
                            HorizontalTextAlignment="Center"

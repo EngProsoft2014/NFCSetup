@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Mopups.Hosting;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 using Syncfusion.Maui.Core.Hosting;
 
 namespace NFCSetup
@@ -13,6 +14,7 @@ namespace NFCSetup
                 .UseMauiApp<App>()
                 .ConfigureMopups()
                 .ConfigureSyncfusionCore()
+                .UseSkiaSharp()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
