@@ -23,13 +23,13 @@
                         </ContentView>
                     </tabView:SfTabItem.Content>
                 </tabView:SfTabItem>
-                <!--Users-->
+                <!--Cards-->
                 <tabView:SfTabItem>
                     <tabView:SfTabItem.ImageSource>
-                        <FontImageSource Glyph="" FontFamily="FontIconSolid" Color="Gray"></FontImageSource>
+                        <FontImageSource Glyph="" FontFamily="FontIconSolid" Color="Gray"></FontImageSource>
                     </tabView:SfTabItem.ImageSource>
                     <tabView:SfTabItem.Content>
-                        <ContentView x:Name="UsersView">
+                        <ContentView x:Name="CardsView">
                             <StackLayout Margin="20">
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="Users" FontAutoScalingEnabled="False" FontSize="18" FontAttributes="Bold" HorizontalTextAlignment="Center"

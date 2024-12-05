@@ -13,7 +13,7 @@ public partial class HomePage : Controls.CustomControl
     {
 		if (e.NewIndex == 1)
 		{
-			UsersView.BindingContext = new UsersiewModel();
+            CardsView.BindingContext = new CardsViewModel();
 		}
 		else if (e.NewIndex == 3)
 		{

@@ -4,7 +4,7 @@ using NFCSetup.Pages.MainPopups;
 
 namespace NFCSetup.ViewModels
 {
-    public partial class UsersiewModel : BaseViewModel
+    public partial class CardsViewModel : BaseViewModel
     {
 
         [RelayCommand]
