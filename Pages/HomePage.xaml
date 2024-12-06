@@ -32,7 +32,7 @@
                         <ContentView x:Name="CardsView">
                             <StackLayout Margin="20">
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="Users" FontAutoScalingEnabled="False" FontSize="18" FontAttributes="Bold" HorizontalTextAlignment="Center"
+                                    <Label Text="Cards" FontAutoScalingEnabled="False" FontSize="18" FontAttributes="Bold" HorizontalTextAlignment="Center"
                                        HorizontalOptions="CenterAndExpand" TextColor="Black"></Label>
                                     <Image>
                                         <Image.Source>
@@ -61,9 +61,23 @@
                     </tabView:SfTabItem.ImageSource>
                     <tabView:SfTabItem.Content>
                         <ContentView x:Name="MoreView">
-                            <StackLayout Margin="20" Spacing="30">
+                            <StackLayout Margin="20" Spacing="20">
                                 <Label Text="More" FontAutoScalingEnabled="False" FontSize="18" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"
                                        TextColor="Black"></Label>
+                                <VerticalStackLayout Margin="0,0,0,50">
+                                    <!--Profile-->
+                                    <HorizontalStackLayout Spacing="8">
+                                        <Image WidthRequest="20" HeightRequest="20">
+                                            <Image.Source>
+                                                <FontImageSource Glyph="" FontFamily="FontIconSolid" Color="Gray"></FontImageSource>
+                                            </Image.Source>
+                                        </Image>
+                                        <Label Text="Profile" FontAutoScalingEnabled="False" TextColor="Gray" FontSize="14" VerticalTextAlignment="Start" FontAttributes="Bold"></Label>
+                                        <HorizontalStackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding ProfileClickCommand}"></TapGestureRecognizer>
+                                        </HorizontalStackLayout.GestureRecognizers>
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
                                 <VerticalStackLayout>
                                     <!--Exit-->
                                     <HorizontalStackLayout Spacing="10">

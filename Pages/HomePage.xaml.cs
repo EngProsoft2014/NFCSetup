@@ -18,6 +18,6 @@ public partial class HomePage : Controls.CustomControl
 		else if (e.NewIndex == 3)
 		{
 			MoreView.BindingContext = new MoreViewModel();
-		}
+		} 
     }
 }

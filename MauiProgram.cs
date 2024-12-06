@@ -1,5 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CommunityToolkit.Maui;
+using Controls.UserDialogs.Maui;
+using Microsoft.Extensions.Logging;
 using Mopups.Hosting;
+using NFCSetup.Helpers;
+using NFCSetup.Services.Data;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using Syncfusion.Maui.Core.Hosting;
 
@@ -12,6 +16,8 @@ namespace NFCSetup
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
+                .UseUserDialogs()
                 .ConfigureMopups()
                 .ConfigureSyncfusionCore()
                 .UseSkiaSharp()
@@ -29,6 +35,8 @@ namespace NFCSetup
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+            builder.Services.AddSingleton<ServicesService>();
+            builder.Services.AddScoped<IGenericRepository, GenericRepository>();
 
             return builder.Build();
         }
