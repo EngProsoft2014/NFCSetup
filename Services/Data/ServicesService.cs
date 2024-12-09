@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Collections.ObjectModel;
-using Newtonsoft.Json;
-//using TripBliss.Models;
-using System.Threading.Tasks;
-using Akavache;
+﻿using Akavache;
 using System.Reactive.Linq;
 using NFCSetup.Mode_s.ApplicationUser;
-using TripBliss.Constants;
+using NFCSetup.Constants;
 using Controls.UserDialogs.Maui;
 using CommunityToolkit.Maui.Alerts;
 

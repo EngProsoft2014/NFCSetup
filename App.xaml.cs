@@ -1,7 +1,7 @@
 ﻿using NFCSetup.Helpers;
 using NFCSetup.Pages;
 using NFCSetup.ViewModels;
-using TripBliss.Constants;
+using NFCSetup.Constants;
 
 namespace NFCSetup
 {

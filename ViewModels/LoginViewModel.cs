@@ -8,7 +8,7 @@ using NFCSetup.Mode_s.ApplicationUser;
 using NFCSetup.Pages;
 using NFCSetup.Services.Data;
 using System.Reactive.Linq;
-using TripBliss.Constants;
+using NFCSetup.Constants;
 
 namespace NFCSetup.ViewModels
 {

@@ -1,7 +1,12 @@
 ﻿namespace NFCSetup.ViewModels
 {
-    public class ProfileViewModel : BaseViewModel 
+    public partial class ProfileViewModel : BaseViewModel 
     {
 
+
+        async Task BackClicked()
+        {
+            await App.Current!.MainPage!.Navigation.PopAsync();
+        }
     }
 }

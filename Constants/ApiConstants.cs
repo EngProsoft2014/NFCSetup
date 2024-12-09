@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-
-namespace TripBliss.Constants
+﻿namespace NFCSetup.Constants
 {
     public class ApiConstants
     {

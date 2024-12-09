@@ -15,6 +15,10 @@ public partial class HomePage : Controls.CustomControl
 		{
             CardsView.BindingContext = new CardsViewModel();
 		}
+		else if (e.NewIndex == 2)
+		{
+			ContactView.BindingContext = new ContactViewModel();
+		}
 		else if (e.NewIndex == 3)
 		{
 			MoreView.BindingContext = new MoreViewModel();
