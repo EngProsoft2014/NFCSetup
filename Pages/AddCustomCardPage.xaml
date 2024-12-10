@@ -32,28 +32,50 @@
                     <VerticalStackLayout HorizontalOptions="FillAndExpand">
                         <Label Text="Profile Image" TextColor="Gray" FontSize="13" Margin="0,15,0,5"></Label>
                         <Border StrokeShape="RoundRectangle 20" HeightRequest="100" HorizontalOptions="FillAndExpand">
-                            <Image WidthRequest="20">
-                                <Image.Source>
-                                    <FontImageSource Glyph="" FontFamily="FontIconSolid" Color="Gray"></FontImageSource>
-                                </Image.Source>
+                            <Image>
+                                <Image.Triggers>
+                                    <DataTrigger Binding="{Binding IsProfileImageAdded}" TargetType="Image" Value="1">
+                                        <Setter Property="Source">
+                                            <Setter.Value>                                                                                                                                                                                                    
+                                                <FontImageSource Glyph="" FontFamily="FontIconSolid" Color="Gray"></FontImageSource>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="WidthRequest" Value="20"></Setter>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsProfileImageAdded}" TargetType="Image" Value="2">
+                                        <Setter Property="Source" Value="{Binding Request.ImgProfileFile}"></Setter>
+                                        <Setter Property="Aspect" Value="AspectFill"></Setter>
+                                    </DataTrigger>
+                                </Image.Triggers>
                             </Image>
                         </Border>
                         <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding AddImageClickCommand}"></TapGestureRecognizer>
+                            <TapGestureRecognizer Command="{Binding AddProfileImageClickCommand}"></TapGestureRecognizer>
                         </VerticalStackLayout.GestureRecognizers>
                     </VerticalStackLayout>
                     <!--Cover Image-->
                     <VerticalStackLayout HorizontalOptions="FillAndExpand">
                         <Label Text="Cover Image" TextColor="Gray" FontSize="13" Margin="0,15,0,5"></Label>
                         <Border StrokeShape="RoundRectangle 20" HeightRequest="100" HorizontalOptions="FillAndExpand">
-                            <Image WidthRequest="20">
-                                <Image.Source>
-                                    <FontImageSource Glyph="" FontFamily="FontIconSolid" Color="Gray"></FontImageSource>
-                                </Image.Source>
+                            <Image>
+                                <Image.Triggers>
+                                    <DataTrigger Binding="{Binding IsCoverImageAdded}" TargetType="Image" Value="1">
+                                        <Setter Property="Source">
+                                            <Setter.Value>
+                                                <FontImageSource Glyph="" FontFamily="FontIconSolid" Color="Gray"></FontImageSource>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="WidthRequest" Value="20"></Setter>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsCoverImageAdded}" TargetType="Image" Value="2">
+                                        <Setter Property="Source" Value="{Binding Request.ImgCoverFile}"></Setter>
+                                        <Setter Property="Aspect" Value="AspectFill"></Setter>
+                                    </DataTrigger>
+                                </Image.Triggers>
                             </Image>
                         </Border>
                         <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding AddImageClickCommand}"></TapGestureRecognizer>
+                            <TapGestureRecognizer Command="{Binding AddCoverImageClickCommand}"></TapGestureRecognizer>
                         </VerticalStackLayout.GestureRecognizers>
                     </VerticalStackLayout>
                 </StackLayout>
@@ -64,7 +86,7 @@
                         <Label Text="Card Name" TextColor="Gray" FontSize="13" Margin="0,15,0,5"></Label>
                         <Border StrokeShape="RoundRectangle 10" StrokeThickness="1" Stroke="Gray" HeightRequest="40">
                             <Entry Keyboard="Text" TextColor="Black" FontSize="14" FontAutoScalingEnabled="False"
-                                   Text="{Binding AirFlightRequestModel.AirportFrom}"></Entry>
+                                   Text="{Binding Request.CardName}"></Entry>
                         </Border>
                     </VerticalStackLayout>
                     <!--Card Layout-->
@@ -72,7 +94,7 @@
                         <Label Text="Card Layout" TextColor="Gray" FontSize="13" Margin="0,15,0,5"></Label>
                         <Border StrokeShape="RoundRectangle 10" StrokeThickness="1" Stroke="Gray" HeightRequest="40">
                             <Entry Keyboard="Text" TextColor="Black" FontSize="14" FontAutoScalingEnabled="False"
-                                   Text="{Binding AirFlightRequestModel.AirportTo}"></Entry>
+                                   Text="{Binding Request.Cardlayout}"></Entry>
                         </Border>
                     </VerticalStackLayout>
                 </StackLayout>
@@ -83,7 +105,7 @@
                         <Label Text="Person Name" TextColor="Gray" FontSize="13" Margin="0,15,0,5"></Label>
                         <Border StrokeShape="RoundRectangle 10" StrokeThickness="1" Stroke="Gray" HeightRequest="40">
                             <Entry Keyboard="Text" TextColor="Black" FontSize="14" FontAutoScalingEnabled="False"
-                   Text="{Binding AirFlightRequestModel.AirportFrom}"></Entry>
+                   Text="{Binding Request.PersonName}"></Entry>
                         </Border>
                     </VerticalStackLayout>
                     <!--Person Nike Name-->
@@ -91,18 +113,18 @@
                         <Label Text="Person Nike Name" TextColor="Gray" FontSize="13" Margin="0,15,0,5"></Label>
                         <Border StrokeShape="RoundRectangle 10" StrokeThickness="1" Stroke="Gray" HeightRequest="40">
                             <Entry Keyboard="Text" TextColor="Black" FontSize="14" FontAutoScalingEnabled="False"
-                   Text="{Binding AirFlightRequestModel.AirportTo}"></Entry>
+                   Text="{Binding Request.PersonNikeName}"></Entry>
                         </Border>
                     </VerticalStackLayout>
                 </StackLayout>
-                <!--location & Job Title-->
+                <!--location & Card Theme-->
                 <StackLayout Orientation="Horizontal" Spacing="35">
                     <VerticalStackLayout HorizontalOptions="FillAndExpand">
                         <!--location-->
                         <Label Text="Location" TextColor="Gray" FontSize="13" Margin="0,15,0,5"></Label>
                         <Border StrokeShape="RoundRectangle 10" StrokeThickness="1" Stroke="Gray" HeightRequest="40">
                             <Entry Keyboard="Text" TextColor="Black" FontSize="14" FontAutoScalingEnabled="False"
-                   Text="{Binding AirFlightRequestModel.AirportFrom}"></Entry>
+                   Text="{Binding Request.location}"></Entry>
                         </Border>
                     </VerticalStackLayout>
                     <!--Card Theme-->
@@ -110,7 +132,7 @@
                         <Label Text="Card Theme" TextColor="Gray" FontSize="13" Margin="0,15,0,5"></Label>
                         <Border StrokeShape="RoundRectangle 10" StrokeThickness="1" Stroke="Gray" HeightRequest="40">
                             <Entry Keyboard="Text" TextColor="Black" FontSize="14" FontAutoScalingEnabled="False"
-                   Text="{Binding AirFlightRequestModel.AirportTo}"></Entry>
+                   Text="{Binding Request.CardTheme}"></Entry>
                         </Border>
                     </VerticalStackLayout>
                 </StackLayout>
@@ -119,7 +141,7 @@
                     <Label Text="Job Title" TextColor="Gray" FontSize="13" Margin="0,15,0,5"></Label>
                     <Border StrokeShape="RoundRectangle 10" StrokeThickness="1" Stroke="Gray" HeightRequest="40">
                         <Entry Keyboard="Text" TextColor="Black" FontSize="14" FontAutoScalingEnabled="False"
-                               Text="{Binding AirFlightRequestModel.AirportTo}"></Entry>
+                               Text="{Binding Request.JobTitle}"></Entry>
                     </Border>
                 </VerticalStackLayout>
                 <!--Link Color & Font Style-->
@@ -129,7 +151,7 @@
                         <Label Text="Link Color" TextColor="Gray" FontSize="13" Margin="0,15,0,5"></Label>
                         <Border StrokeShape="RoundRectangle 10" StrokeThickness="1" Stroke="Gray" HeightRequest="40">
                             <Entry Keyboard="Text" TextColor="Black" FontSize="14" FontAutoScalingEnabled="False"
-   Text="{Binding AirFlightRequestModel.AirportFrom}"></Entry>
+   Text="{Binding Request.LinkColor}"></Entry>
                         </Border>
                     </VerticalStackLayout>
                     <!--Font Style-->
@@ -137,7 +159,7 @@
                         <Label Text="Font Style" TextColor="Gray" FontSize="13" Margin="0,15,0,5"></Label>
                         <Border StrokeShape="RoundRectangle 10" StrokeThickness="1" Stroke="Gray" HeightRequest="40">
                             <Entry Keyboard="Text" TextColor="Black" FontSize="14" FontAutoScalingEnabled="False"
-   Text="{Binding AirFlightRequestModel.AirportTo}"></Entry>
+   Text="{Binding Request.FontStyle}"></Entry>
                         </Border>
                     </VerticalStackLayout>
                 </StackLayout>
@@ -147,12 +169,12 @@
                     <Label Text="Bio" TextColor="Gray" FontSize="13" Margin="0,15,0,5"></Label>
                     <Border StrokeShape="RoundRectangle 10" StrokeThickness="1" Stroke="Gray" HeightRequest="120">
                         <Entry Keyboard="Text" TextColor="Black" FontSize="14" FontAutoScalingEnabled="False"
-                               Text="{Binding AirFlightRequestModel.AirportFrom}"></Entry>
+                               Text="{Binding Request.Bio}"></Entry>
                     </Border>
                 </VerticalStackLayout>
                 <!--Save Button-->
                 <Button VerticalOptions="EndAndExpand" FontAutoScalingEnabled="False" Text="Save" FontSize="16" FontAttributes="Bold" 
-                        BackgroundColor="#FF7F3E" TextColor="White" Margin="0,80,0,0"></Button>
+                        BackgroundColor="#FF7F3E" TextColor="White" Margin="0,80,0,0" Command="{Binding SaveClickCommand}"></Button>
             </StackLayout>
         </ScrollView>
     </StackLayout>

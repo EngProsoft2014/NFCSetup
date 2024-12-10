@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,14 @@ namespace NFCSetup.ViewModels
         public string? lang = "en";
         [ObservableProperty]
         public bool? isEnable = true;
+
+
+        #region RelayCommand
+        [RelayCommand]
+        async Task BackClicked()
+        {
+            await App.Current!.MainPage!.Navigation.PopAsync();
+        } 
+        #endregion
     }
 }
