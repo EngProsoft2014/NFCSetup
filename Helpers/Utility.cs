@@ -33,7 +33,7 @@ namespace NFCSetup.Helpers
 
         public static readonly string PathServerProfileImages = "https://projectservices.engprosoft.com/EmployeePic/";
 
-        public static readonly string ServerUrl = "https://cards.engprosoft.net/";
+        public static readonly string ServerUrl = "https://schoolapi.engprosoft.net/";
         //public static readonly string ServerUrl = "https://dhm.engprosoft.net/";
 
 

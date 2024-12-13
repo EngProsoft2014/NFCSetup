@@ -31,7 +31,7 @@ namespace NFCSetup.ViewModels
         {
             Rep = GenericRep;
             _service = service;
-        } 
+        }
         #endregion
 
         #region RelayCommand
@@ -39,49 +39,55 @@ namespace NFCSetup.ViewModels
         async Task LoginClick(ApplicationUserLoginRequest model)
         {
             IsEnable = false;
-            UserDialogs.Instance.ShowLoading();
-
-            var json = await Rep.PostTRAsync<ApplicationUserLoginRequest, ApplicationUserResponse>(ApiConstants.LoginApi, model);
-
-            if (json.Item1 != null)
+            if (string.IsNullOrEmpty(model.UserName))
             {
-                UserResponse = json.Item1;
-
-                if (!string.IsNullOrEmpty(UserResponse?.Id))
-                {
-                    Controls.StaticMember.WayOfTab = 0;
-
-                    Preferences.Default.Set(ApiConstants.userid, UserResponse.Id);
-                    Preferences.Default.Set(ApiConstants.email, UserResponse.Email);
-                    Preferences.Default.Set(ApiConstants.username, UserResponse.UserName);
-                    Preferences.Default.Set(ApiConstants.userPermision, UserResponse.UserPermision);
-                    Preferences.Default.Set(ApiConstants.userCategory, UserResponse.UserCategory);
-                    Preferences.Default.Set(ApiConstants.AccountId, UserResponse.AccountId);
-
-                    await BlobCache.LocalMachine.InsertObject(ServicesService.UserTokenServiceKey, UserResponse?.Token, DateTimeOffset.Now.AddMinutes(43200));
-
-                    var vm = new HomeViewModel();
-                    var page = new HomePage();
-                    page.BindingContext = vm;
-                    await App.Current!.MainPage!.Navigation.PushAsync(page);
-                }
+                var toast = Toast.Make($"Field Required : User Name", CommunityToolkit.Maui.Core.ToastDuration.Long, 15);
+                await toast.Show();
+            }
+            else if (string.IsNullOrEmpty(model.Password))
+            {
+                var toast = Toast.Make($"Field Required : Password", CommunityToolkit.Maui.Core.ToastDuration.Long, 15);
+                await toast.Show();
             }
             else
             {
+                UserDialogs.Instance.ShowLoading();
+                var json = await Rep.PostTRAsync<ApplicationUserLoginRequest, ApplicationUserResponse>(ApiConstants.LoginApi, model);
 
-                var toast = Toast.Make($"{json.Item2?.errors?.FirstOrDefault().Value}", CommunityToolkit.Maui.Core.ToastDuration.Long, 15);
-                await toast.Show();
+                if (json.Item1 != null)
+                {
+                    UserResponse = json.Item1;
 
-                var vm = new HomeViewModel();
-                var page = new HomePage();
-                page.BindingContext = vm;
-                await App.Current!.MainPage!.Navigation.PushAsync(page);
+                    if (!string.IsNullOrEmpty(UserResponse?.Id))
+                    {
+                        Controls.StaticMember.WayOfTab = 0;
+
+                        Preferences.Default.Set(ApiConstants.userid, UserResponse.Id);
+                        Preferences.Default.Set(ApiConstants.email, UserResponse.Email);
+                        Preferences.Default.Set(ApiConstants.username, UserResponse.UserName);
+                        Preferences.Default.Set(ApiConstants.userPermision, UserResponse.UserPermision);
+                        Preferences.Default.Set(ApiConstants.userCategory, UserResponse.UserCategory);
+                        Preferences.Default.Set(ApiConstants.AccountId, UserResponse.AccountId);
+
+                        await BlobCache.LocalMachine.InsertObject(ServicesService.UserTokenServiceKey, UserResponse?.Token, DateTimeOffset.Now.AddMinutes(43200));
+
+                        var vm = new HomeViewModel();
+                        var page = new HomePage(Rep,_service);
+                        page.BindingContext = vm;
+                        await App.Current!.MainPage!.Navigation.PushAsync(page);
+                    }
+                }
+                else
+                {
+
+                    var toast = Toast.Make($"{json.Item2?.errors?.FirstOrDefault().Value}", CommunityToolkit.Maui.Core.ToastDuration.Long, 15);
+                    await toast.Show();
+                }
+
+                UserDialogs.Instance.HideHud();
             }
-
-            UserDialogs.Instance.HideHud();
-
             IsEnable = true;
-        } 
+        }
         #endregion
     }
 }

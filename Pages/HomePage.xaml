@@ -40,10 +40,48 @@
                                                 <FontImageSource Glyph="" FontFamily="FontIconSolid" Color="#FF7F3E"></FontImageSource>
                                             </Image.Source>
                                             <Image.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding AddUserClickCommand}"></TapGestureRecognizer>
+                                                <TapGestureRecognizer Command="{Binding AddCardClickCommand}"></TapGestureRecognizer>
                                             </Image.GestureRecognizers>
                                         </Image>
                                     </StackLayout>
+                                    <Border StrokeShape="RoundRectangle 20" Margin="0,30,0,0" Padding="10">
+                                        <StackLayout Orientation="Horizontal" Spacing="15">
+                                            <VerticalStackLayout>
+                                                <Label Text="Abdullah Akl" TextColor="Black" FontSize="14" FontAttributes="Bold"></Label>
+                                                <Label Text="Mobile Developer" TextColor="Gray" FontSize="12"></Label>
+                                            </VerticalStackLayout>
+                                            <!--Edit-->
+                                            <!--<Image HorizontalOptions="EndAndExpand">
+                                                <Image.Source>
+                                                    <FontImageSource Glyph="" FontFamily="FontIconSolid" Color="Gray" Size="20"></FontImageSource>
+                                                </Image.Source>
+                                            </Image>-->
+                                            <!--PreView-->
+                                            <Image HorizontalOptions="EndAndExpand">
+                                                <Image.Source>
+                                                    <FontImageSource Glyph="" FontFamily="FontIconSolid" Color="Gray" Size="20"></FontImageSource>
+                                                </Image.Source>
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding CardPreViewClickCommand}"></TapGestureRecognizer>
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                            <!--Share-->
+                                            <Image>
+                                                <Image.Source>
+                                                    <FontImageSource Glyph="" FontFamily="FontIconSolid" Color="Gray" Size="20"></FontImageSource>
+                                                </Image.Source>
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding ShareCardClickCommand}"></TapGestureRecognizer>
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                            <!--Delete-->
+                                            <Image>
+                                                <Image.Source>
+                                                    <FontImageSource Glyph="" FontFamily="FontIconSolid" Color="Red" Size="20"></FontImageSource>
+                                                </Image.Source>
+                                            </Image>
+                                        </StackLayout>
+                                    </Border>
                                 </StackLayout>
                             </ContentView>
                         </tabView:SfTabItem.Content>
@@ -125,7 +163,7 @@
                                             </Image>
                                             <Label Text="Exit" FontAutoScalingEnabled="False" TextColor="Gray" FontSize="14" VerticalTextAlignment="Start" FontAttributes="Bold"></Label>
                                             <HorizontalStackLayout.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding SelectExitCommand}"></TapGestureRecognizer>
+                                                <TapGestureRecognizer Command="{Binding ExitClickCommand}"></TapGestureRecognizer>
                                             </HorizontalStackLayout.GestureRecognizers>
                                         </HorizontalStackLayout>
                                     </VerticalStackLayout>

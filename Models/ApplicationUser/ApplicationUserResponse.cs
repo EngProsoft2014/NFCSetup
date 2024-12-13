@@ -13,8 +13,8 @@ namespace NFCSetup.Mode_s.ApplicationUser
         public string UserName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-        public int UserCategory { get; set; }
-        public int UserPermision { get; set; }
+        public string? UserCategory { get; set; }
+        public string? UserPermision { get; set; }
         public string? Token { get; set; }
         public int ExpiresIn { get; set; }
         public bool IsDisabled { get; set; }

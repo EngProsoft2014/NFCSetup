@@ -1,16 +1,16 @@
-using NFCSetup.ViewModels;
 using Plugin.NFC;
 using System.Text;
 
 namespace NFCSetup.Pages;
 
-public partial class ProfilePage : Controls.CustomControl
+public partial class CardPreViewPage : Controls.CustomControl
 {
-    ProfileViewModel Model;
-    public ProfilePage(ProfileViewModel model)
-    {
-        InitializeComponent();
-        Model = model;
+	public CardPreViewPage()
+	{
+		InitializeComponent();
+
+        // Initialize NFC Plugin
+        CrossNFC.Current.StartListening();
     }
 
     public const string ALERT_TITLE = "NFC";
@@ -241,6 +241,7 @@ public partial class ProfilePage : Controls.CustomControl
     /// <param name="format">Format the tag</param>
     async void Current_OnTagDiscovered(ITagInfo tagInfo, bool format)
     {
+        format = true;
         if (!CrossNFC.Current.IsWritingTagSupported)
         {
             await ShowAlert("Writing tag is not supported on this device");
@@ -248,7 +249,7 @@ public partial class ProfilePage : Controls.CustomControl
         }
 
 
-        string vCardData = $"{Model.UserResponse.Account}";
+        string vCardData = $"gg";
 
         try
         {

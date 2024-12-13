@@ -62,6 +62,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="akavache" Version="10.1.6" />
+		<PackageReference Include="ColorPicker.Maui" Version="1.0.0" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.1" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
 		<PackageReference Include="Controls.UserDialogs.Maui" Version="1.7.0" />
@@ -89,10 +90,16 @@
 	  <MauiXaml Update="Pages\AddCustomCardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\CardPreViewPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\HomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\MainPopups\AddAttachmentsPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\MainPopups\QrCodePopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\MainPopups\UserPopup.xaml">

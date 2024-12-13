@@ -17,11 +17,22 @@ namespace NFCSetup
             _service = service;
             InitializeComponent();
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(ApiConstants.syncFusionLicence);
-
-            var vm = new LoginViewModel(Rep,_service);
-            var page = new LoginPage();
-            page.BindingContext = vm;
-            MainPage = new NavigationPage(page);  
+            string AccountId = Preferences.Default.Get(ApiConstants.AccountId, "");
+            if (string.IsNullOrEmpty(AccountId))
+            {
+                var vm = new LoginViewModel(Rep, _service);
+                var page = new LoginPage();
+                page.BindingContext = vm;
+                MainPage = new NavigationPage(page);
+            }
+            else
+            {
+                var vm = new HomeViewModel();
+                var page = new HomePage(Rep, _service);
+                page.BindingContext = vm;
+                MainPage = new NavigationPage(page);
+            }
+            
         }
     }
 }
