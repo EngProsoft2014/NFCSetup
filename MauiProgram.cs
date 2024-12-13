@@ -22,6 +22,7 @@ namespace NFCSetup
                 .ConfigureMopups()
                 .ConfigureSyncfusionCore()
                 .UseSkiaSharp()
+                
                 .UseBarcodeReader()
                 .ConfigureFonts(fonts =>
                 {
