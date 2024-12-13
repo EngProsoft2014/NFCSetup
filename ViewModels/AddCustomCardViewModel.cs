@@ -1,6 +1,10 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Controls.UserDialogs.Maui;
 using Mopups.Services;
+using NFCSetup.Constants;
+using NFCSetup.Helpers;
 using NFCSetup.Mode_s.Card;
 using NFCSetup.Pages.MainPopups;
 
@@ -15,6 +19,47 @@ namespace NFCSetup.ViewModels
         public int isProfileImageAdded = 1;
         [ObservableProperty]
         public int isCoverImageAdded = 1;
+        [ObservableProperty]
+        CardResponse card = new CardResponse();
+        #endregion
+
+        #region Service
+        readonly IGenericRepository Rep;
+        readonly Services.Data.ServicesService _service;
+        #endregion
+
+        #region Cons
+        public AddCustomCardViewModel(IGenericRepository GenericRep, Services.Data.ServicesService service)
+        {
+            Rep = GenericRep;
+            _service = service;
+        }
+        public AddCustomCardViewModel(CardResponse _card, IGenericRepository GenericRep, Services.Data.ServicesService service)
+        {
+            Rep = GenericRep;
+            _service = service;
+            Init(_card);
+        }
+        #endregion
+
+        #region Methods
+        void Init(CardResponse card)
+        {
+            Request.CardName = card.CardName;
+            Request.Cardlayout = card.Cardlayout;
+            Request.Bio = card.Bio;
+            Request.location = card.location;
+            Request.CardTheme = card.CardTheme;
+            Request.FontStyle = card.FontStyle;
+            Request.JobTitle = card.JobTitle;
+            Request.PersonName = card.PersonName;
+            Request.LinkColor = card.LinkColor;
+            Request.PersonNikeName = card.PersonNikeName;
+            Request.ImgProfileFile = ImageSource.FromUri(new Uri(card.UrlImgProfile!));
+            IsProfileImageAdded = 2;
+            Request.ImgCoverFile = ImageSource.FromUri(new Uri(card.UrlImgCover!));
+            IsCoverImageAdded = 2;
+        } 
         #endregion
 
         #region RelayCommand
@@ -58,7 +103,29 @@ namespace NFCSetup.ViewModels
         [RelayCommand]
         async Task SaveClick()
         {
+            IsEnable = false;
+            if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+            {
+                string UserToken = await _service.UserToken();
+                string accid = Preferences.Default.Get(ApiConstants.AccountId, "");
+                UserDialogs.Instance.ShowLoading();
+                var json = await Rep.PostTRAsync<CardRequest, CardResponse>($"{ApiConstants.CardUpdateApi}{accid}/Card/{Card.Id}" , Request, UserToken );
+                UserDialogs.Instance.HideHud();
+                if (json.Item1 != null)
+                {
+                    var toast = Toast.Make("Successfully update card.", CommunityToolkit.Maui.Core.ToastDuration.Long, 15);
+                    await toast.Show();
 
+                }
+                else
+                {
+                    var toast = Toast.Make($"{json.Item2!.errors!.FirstOrDefault().Value}", CommunityToolkit.Maui.Core.ToastDuration.Long, 15);
+                    await toast.Show();
+                }
+            }
+
+
+            IsEnable = true;
         }
         #endregion
     }

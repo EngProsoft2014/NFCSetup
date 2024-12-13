@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:tabView="clr-namespace:Syncfusion.Maui.TabView;assembly=Syncfusion.Maui.TabView"
              xmlns:Controls="clr-namespace:NFCSetup.Controls"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
+             xmlns:vm="clr-namespace:NFCSetup.ViewModels"
              x:Class="NFCSetup.Pages.HomePage"
              Title="HomePage">
     <ScrollView VerticalOptions="FillAndExpand">
@@ -32,6 +34,7 @@
                         <tabView:SfTabItem.Content>
                             <ContentView x:Name="CardsView">
                                 <StackLayout Margin="20">
+                                    <!--Header-->
                                     <StackLayout Orientation="Horizontal">
                                         <Label Text="Cards" FontAutoScalingEnabled="False" FontSize="18" FontAttributes="Bold" HorizontalTextAlignment="Center"
                                        HorizontalOptions="CenterAndExpand" TextColor="Black"></Label>
@@ -44,44 +47,79 @@
                                             </Image.GestureRecognizers>
                                         </Image>
                                     </StackLayout>
-                                    <Border StrokeShape="RoundRectangle 20" Margin="0,30,0,0" Padding="10">
-                                        <StackLayout Orientation="Horizontal" Spacing="15">
-                                            <VerticalStackLayout>
-                                                <Label Text="Abdullah Akl" TextColor="Black" FontSize="14" FontAttributes="Bold"></Label>
-                                                <Label Text="Mobile Developer" TextColor="Gray" FontSize="12"></Label>
-                                            </VerticalStackLayout>
-                                            <!--Edit-->
-                                            <!--<Image HorizontalOptions="EndAndExpand">
-                                                <Image.Source>
-                                                    <FontImageSource Glyph="" FontFamily="FontIconSolid" Color="Gray" Size="20"></FontImageSource>
-                                                </Image.Source>
-                                            </Image>-->
-                                            <!--PreView-->
-                                            <Image HorizontalOptions="EndAndExpand">
-                                                <Image.Source>
-                                                    <FontImageSource Glyph="" FontFamily="FontIconSolid" Color="Gray" Size="20"></FontImageSource>
-                                                </Image.Source>
-                                                <Image.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding CardPreViewClickCommand}"></TapGestureRecognizer>
-                                                </Image.GestureRecognizers>
-                                            </Image>
-                                            <!--Share-->
-                                            <Image>
-                                                <Image.Source>
-                                                    <FontImageSource Glyph="" FontFamily="FontIconSolid" Color="Gray" Size="20"></FontImageSource>
-                                                </Image.Source>
-                                                <Image.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding ShareCardClickCommand}"></TapGestureRecognizer>
-                                                </Image.GestureRecognizers>
-                                            </Image>
-                                            <!--Delete-->
-                                            <Image>
-                                                <Image.Source>
-                                                    <FontImageSource Glyph="" FontFamily="FontIconSolid" Color="Red" Size="20"></FontImageSource>
-                                                </Image.Source>
-                                            </Image>
-                                        </StackLayout>
-                                    </Border>
+                                    <!--Cards-->
+                                    <CollectionView ItemsSource="{Binding CardLst}" VerticalOptions="FillAndExpand" Margin="0,40,0,0" HorizontalOptions="FillAndExpand" >
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackLayout HorizontalOptions="FillAndExpand" WidthRequest="300" Margin="40,0,0,0">
+                                                    <!--Qr code Iamge-->
+                                                    <Border StrokeShape="RoundRectangle 20" WidthRequest="200" Padding="10">
+                                                        <VerticalStackLayout Spacing="5">
+
+                                                            <zxing:BarcodeGeneratorView
+                                                                  HeightRequest="150"
+                                                                  WidthRequest="150"
+                                                                  ForegroundColor="#FF7F3E"
+                                                                  Value="{Binding CardUrl}"
+                                                                  Format="QrCode"/>
+                                                            <Label Text="Scan to share Card" TextColor="Black" FontSize="14" FontAttributes="Bold" HorizontalTextAlignment="Center"></Label>
+                                                        </VerticalStackLayout>
+                                                    </Border>
+                                                    <!--Card Data-->
+                                                    <Border StrokeShape="RoundRectangle 20" BackgroundColor="#FF7F3E" StrokeThickness="0" Margin="0,30,0,0">
+                                                        <StackLayout Orientation="Horizontal" Spacing="15">
+                                                            <StackLayout HorizontalOptions="FillAndExpand">
+                                                                <!--Cover Iamge-->
+                                                                <Image Source="{Binding UrlImgCover}" HeightRequest="100" HorizontalOptions="FillAndExpand" 
+                                                                       Aspect="AspectFill"></Image>
+                                                                <Grid HorizontalOptions="FillAndExpand">
+                                                                    <VerticalStackLayout >
+                                                                        <!--Profile Iamge-->
+                                                                        <Border StrokeShape="RoundRectangle 50" WidthRequest="85" HorizontalOptions="CenterAndExpand" TranslationY="-45" HeightRequest="85" BackgroundColor="Red">
+                                                                            <Image  Source="{Binding UrlImgProfile}" Aspect="AspectFill" HeightRequest="85"></Image>
+                                                                        </Border>
+                                                                        <!--Card Data-->
+                                                                        <VerticalStackLayout HorizontalOptions="CenterAndExpand" Margin="10,0,0,0" TranslationY="-35">
+                                                                            <Label Text="{Binding Cardlayout}" TextColor="Black" FontSize="14" FontAttributes="Bold"></Label>
+                                                                            <Label Text="{Binding JobTitle}" TextColor="Gray" FontSize="12"></Label>
+                                                                        </VerticalStackLayout>
+                                                                        <!--Card Optiones-->
+                                                                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="20" 
+                                                                                 Margin="25,0" TranslationY="-25">
+                                                                            <!--Edit Card-->
+                                                                            <Button Text="Edit" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray" CornerRadius="20"
+                                                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CardsViewModel}},Path=EditCardClickCommand}"
+                                                                                    CommandParameter="{Binding .}"></Button>
+                                                                            <!--PreView-->
+                                                                            <Button Text="PreView" HorizontalOptions="FillAndExpand" BackgroundColor="LightGray" CornerRadius="20"
+                                                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CardsViewModel}},Path=CardPreViewClickCommand}"
+                                                                                    CommandParameter="{Binding .}"></Button>
+                                                                            <!--More Optiions-->
+                                                                            <Border StrokeShape="RoundRectangle 20" StrokeThickness="0" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand">
+                                                                                <Image WidthRequest="25">
+                                                                                    <Image.Source>
+                                                                                        <FontImageSource Glyph="" FontFamily="FontIconSolid" Color="White" Size="15"></FontImageSource>
+                                                                                    </Image.Source>
+                                                                                    <Image.GestureRecognizers>
+                                                                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CardsViewModel}},Path=MoreOPtionsClickCommand}"
+                                                                                                              CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                                                                    </Image.GestureRecognizers>
+                                                                                </Image>
+                                                                                
+                                                                            </Border>
+                                                                        </StackLayout>
+                                                                    </VerticalStackLayout>
+                                                                </Grid>
+                                                            </StackLayout>
+                                                        </StackLayout>
+                                                    </Border>
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                        <CollectionView.ItemsLayout>
+                                            <GridItemsLayout Orientation="Horizontal" HorizontalItemSpacing="15"></GridItemsLayout>
+                                        </CollectionView.ItemsLayout>
+                                    </CollectionView>
                                 </StackLayout>
                             </ContentView>
                         </tabView:SfTabItem.Content>

@@ -1,3 +1,4 @@
+using NFCSetup.Mode_s.Card;
 using Plugin.NFC;
 using System.Text;
 
@@ -5,10 +6,12 @@ namespace NFCSetup.Pages;
 
 public partial class CardPreViewPage : Controls.CustomControl
 {
-	public CardPreViewPage()
-	{
+    CardResponse Card = new CardResponse();
+    public CardPreViewPage(CardResponse _Card)
+    {
 		InitializeComponent();
 
+        Card = _Card;
         // Initialize NFC Plugin
         CrossNFC.Current.StartListening();
     }
@@ -249,7 +252,7 @@ public partial class CardPreViewPage : Controls.CustomControl
         }
 
 
-        string vCardData = $"gg";
+        string vCardData = Card.ToString();
 
         try
         {

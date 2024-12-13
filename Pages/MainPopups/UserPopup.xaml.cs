@@ -1,13 +1,20 @@
 using Mopups.Services;
+using NFCSetup.Helpers;
 using NFCSetup.ViewModels;
 
 namespace NFCSetup.Pages.MainPopups;
 
 public partial class UserPopup : Mopups.Pages.PopupPage
 {
-    public UserPopup()
+    #region Service
+    readonly IGenericRepository Rep;
+    readonly Services.Data.ServicesService _service;
+    #endregion
+    public UserPopup(IGenericRepository GenericRep, Services.Data.ServicesService service)
 	{
         InitializeComponent();
+        Rep = GenericRep;
+        _service = service;
     }
 
     private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
@@ -17,7 +24,7 @@ public partial class UserPopup : Mopups.Pages.PopupPage
 
     private async void TapGestureRecognizer_Custom_Vcard(object sender, TappedEventArgs e)
     {
-        var vm = new AddCustomCardViewModel();
+        var vm = new AddCustomCardViewModel(Rep,_service);
         var page = new AddCustomCardPage();
         page.BindingContext = vm;
         await App.Current!.MainPage!.Navigation.PushAsync(page);

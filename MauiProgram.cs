@@ -6,6 +6,7 @@ using NFCSetup.Helpers;
 using NFCSetup.Services.Data;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using Syncfusion.Maui.Core.Hosting;
+using ZXing.Net.Maui.Controls;
 
 namespace NFCSetup
 {
@@ -21,6 +22,7 @@ namespace NFCSetup
                 .ConfigureMopups()
                 .ConfigureSyncfusionCore()
                 .UseSkiaSharp()
+                .UseBarcodeReader()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

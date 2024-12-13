@@ -23,6 +23,7 @@ namespace NFCSetup.Mode_s.Card
         public string? CardTheme { get; set; } = default!;
         public string? LinkColor { get; set; } = default!;
         public string? FontStyle { get; set; } = default!;
+        public string? CardUrl { get; set; } = default!;
         public bool? Active { get; set; }
     }
 }

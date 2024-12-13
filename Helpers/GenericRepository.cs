@@ -891,14 +891,14 @@ namespace NFCSetup.Helpers
         {
             HttpClient httpClient = CreateHttpClient(authToken);
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
-            await httpClient.DeleteAsync(uri);
+            var res = await httpClient.DeleteAsync(Utility.ServerUrl + uri);
         }
 
         public async Task DeleteItemAsync(string uri, string authToken = "")
         {
             HttpClient httpClient = CreateHttpClient(authToken);
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
-            await httpClient.DeleteAsync(uri);
+            await httpClient.DeleteAsync(Utility.ServerUrl + uri);
         }
 
         public async Task<string> DeleteStrItemAsync(string uri, string authToken = "")

@@ -97,8 +97,6 @@
                         <RoundRectangle CornerRadius="20"></RoundRectangle>
                     </Border.StrokeShape>
                 </Border>
-
-
             </StackLayout>
         </Border>
     </StackLayout>
